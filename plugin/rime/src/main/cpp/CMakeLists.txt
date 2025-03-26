@@ -41,20 +41,33 @@ set(RIME_DATA_DIR "${CMAKE_INSTALL_DATADIR}/rime-data")
 add_subdirectory(fcitx5-rime)
 
 install(FILES
-        "default.yaml"
-        "rime-essay/essay.txt"
-        "rime-prelude/key_bindings.yaml"
-        "rime-prelude/punctuation.yaml"
-        "rime-prelude/symbols.yaml"
-        "rime-luna-pinyin/luna_pinyin_fluency.schema.yaml"
-        "rime-luna-pinyin/luna_pinyin_simp.schema.yaml"
-        "rime-luna-pinyin/luna_pinyin_tw.schema.yaml"
-        "rime-luna-pinyin/luna_pinyin.dict.yaml"
-        "rime-luna-pinyin/luna_pinyin.schema.yaml"
-        "rime-luna-pinyin/luna_quanpin.schema.yaml"
-        "rime-luna-pinyin/pinyin.yaml"
-        "rime-stroke/stroke.dict.yaml"
-        "rime-stroke/stroke.schema.yaml"
-        DESTINATION "${FCITX_INSTALL_DATADIR}/rime-data"
-        COMPONENT prebuilt-assets
-        )
+    typeduck-data/cangjie3.dict.yaml
+    typeduck-data/cangjie3.schema.yaml
+    typeduck-data/cangjie5.dict.yaml
+    typeduck-data/cangjie5.schema.yaml
+    typeduck-data/common.custom.yaml
+    typeduck-data/common.yaml
+    typeduck-data/default.custom.yaml
+    typeduck-data/default.yaml
+    typeduck-data/include.yaml
+    typeduck-data/jyut6ping3.dict.yaml
+    typeduck-data/jyut6ping3.schema.yaml
+    typeduck-data/jyut6ping3_mobile.schema.yaml
+    typeduck-data/jyut6ping3_mobile_10keys.schema.yaml
+    typeduck-data/jyut6ping3_mobile_longpress.schema.yaml
+    typeduck-data/jyut6ping3_scolar.dict.yaml
+    typeduck-data/jyut6ping3_scolar.schema.yaml
+    typeduck-data/loengfan.dict.yaml
+    typeduck-data/loengfan.schema.yaml
+    typeduck-data/loengfan_longpress.schema.yaml
+    typeduck-data/luna_pinyin.dict.yaml
+    typeduck-data/luna_pinyin.schema.yaml
+    typeduck-data/template.yaml
+    typeduck-data/trime.yaml
+    typeduck-data/weasel.yaml
+    DESTINATION "${FCITX_INSTALL_DATADIR}/rime-data"
+    COMPONENT prebuilt-assets
+)
+install(DIRECTORY "typeduck-data/opencc/"
+        DESTINATION "${FCITX_INSTALL_DATADIR}/rime-data/opencc"
+        COMPONENT prebuilt-assets)

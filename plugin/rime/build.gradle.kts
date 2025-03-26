@@ -47,7 +47,7 @@ fcitxComponent {
 }
 
 generateDataDescriptor {
-    symlinks.put("usr/share/rime-data/opencc", "usr/share/opencc")
+    //symlinks.put("usr/share/rime-data/opencc", "usr/share/opencc")
 }
 
 dependencies {
