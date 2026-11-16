@@ -40,10 +40,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      - name: Publish build convention and libs
+      - name: Publish build convention
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_ACTOR: ${{ github.actor }}
         run: |
           ./gradlew :build-logic:convention:publish
-          ./gradlew :lib:common:publish
