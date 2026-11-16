@@ -59,7 +59,4 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/../../../../lib/rime/src/main/cpp/fci
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../../../lib/rime/src/main/schema/"
         DESTINATION "${FCITX_INSTALL_DATADIR}/rime-data"
         COMPONENT prebuilt-assets
-        PATTERN ".git" EXCLUDE
-        PATTERN ".github" EXCLUDE
-        PATTERN "notes" EXCLUDE
-        PATTERN ".gitignore" EXCLUDE)
+        PATTERN ".git" EXCLUDE)

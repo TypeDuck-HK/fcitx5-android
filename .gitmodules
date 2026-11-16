@@ -11,3 +11,4 @@
 [submodule "lib/rime/src/main/schema"]
 	path = lib/rime/src/main/schema
 	url = https://github.com/TypeDuck-HK/schema.git
+	branch = mobile
