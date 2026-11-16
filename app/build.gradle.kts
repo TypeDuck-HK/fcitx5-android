@@ -61,14 +61,8 @@ android {
 fcitxComponent {
     includeLibs = listOf(
         "fcitx5",
-        "fcitx5-lua",
-        "libime",
-        "fcitx5-chinese-addons"
+        "rime"
     )
-    // exclude (delete immediately after install) tables that nobody would use
-    excludeFiles = listOf("cangjie", "erbi", "qxm", "wanfeng").map {
-        "usr/share/fcitx5/inputmethod/$it.conf"
-    }
     installPrebuiltAssets = true
 }
 
@@ -79,9 +73,7 @@ ksp {
 dependencies {
     ksp(project(":codegen"))
     implementation(project(":lib:fcitx5"))
-    implementation(project(":lib:fcitx5-lua"))
-    implementation(project(":lib:libime"))
-    implementation(project(":lib:fcitx5-chinese-addons"))
+    implementation(project(":lib:rime"))
     implementation(project(":lib:common"))
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlinx.serialization.json)

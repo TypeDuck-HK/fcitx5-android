@@ -28,9 +28,6 @@
     <string name="prev">Anterior</string>
     <string name="done">Hecho</string>
     <string name="import_error">Error de importación</string>
-    <string name="dict_already_exists">El diccionario ya existe</string>
-    <string name="invalid_dict">El tipo de diccionario no es válido</string>
-    <string name="whether_import_dict">¿Quiere importar este diccionario?</string>
     <string name="import_">Importar</string>
     <string name="loading">Cargando</string>
     <string name="about">Acerca de</string>
@@ -95,22 +92,12 @@
     <string name="system_default">Predeterminado del sistema</string>
     <string name="default_">Predeterminado</string>
     <string name="delete_all_pinned_items">¿Quiere eliminar todos los elementos anclados?</string>
-    <string name="table_file_does_not_exist_title">Tabla no disponible</string>
-    <string name="import_table">Importar tabla</string>
-    <string name="table_from_zip">Desde ZIP...</string>
-    <string name="table_select_files">Desde archivos separados...</string>
-    <string name="table_file_placeholder">Seleccionar archivo...</string>
-    <string name="table_dict_select_title">Diccionario de tablas (.dict o .txt)</string>
     <string name="space_behavior_none">Ninguno</string>
     <string name="space_behavior_enumerate">Enumerar métodos de entrada</string>
     <string name="delete_theme">Eliminar tema</string>
     <string name="delete_theme_msg">¿Realmente quiere eliminar el tema «%1$s»?</string>
-    <string name="plugins">Complementos</string>
-    <string name="plugins_failed">Falló la carga</string>
-    <string name="main_program">programa principal</string>
     <string name="edit_theme">Editar tema</string>
     <string name="show_voice_input_button">Mostrar botón de entrada por voz</string>
-    <string name="no_plugins">No hay ningún complemento disponible</string>
     <string name="whether_reset_switch_preference">¿Quiere restablecer la preferencia a su valor predeterminado?</string>
     <string name="enabled">Activado</string>
     <string name="following_system_settings">Seguir configuración del sistema</string>
@@ -123,5 +110,4 @@
     <string name="restart_notify_msg">Se reinició la aplicación; pulse aquí para abrir</string>
     <string name="i_do_not_need_it">No lo necesito</string>
     <string name="grant_permission">Otorgar permiso</string>
-    <string name="update_table">Actualizar tabla</string>
     </resources>

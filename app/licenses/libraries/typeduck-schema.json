@@ -1,0 +1,8 @@
+{
+    "uniqueId": "TypeDuck-HK/schema",
+    "name": "TypeDuck Schema and Dictionary Data",
+    "description": "Includes reverse lookup data with notices retained in the bundled package README.",
+    "website": "https://github.com/TypeDuck-HK/schema",
+    "tag": "data",
+    "licenses": ["CC-BY-4.0"]
+}

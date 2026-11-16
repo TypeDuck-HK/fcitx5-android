@@ -4,9 +4,7 @@
  */
 package org.fcitx.fcitx5.android.ui.main.settings
 
-import android.app.AlertDialog
 import android.content.Context
-import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.preference.DialogPreference
@@ -24,9 +22,6 @@ import org.fcitx.fcitx5.android.core.Key
 import org.fcitx.fcitx5.android.core.RawConfig
 import org.fcitx.fcitx5.android.data.prefs.AppPrefs
 import org.fcitx.fcitx5.android.ui.main.modified.MySwitchPreference
-import org.fcitx.fcitx5.android.utils.LongClickPreference
-import org.fcitx.fcitx5.android.utils.buildDocumentsProviderIntent
-import org.fcitx.fcitx5.android.utils.buildPrimaryStorageIntent
 import org.fcitx.fcitx5.android.utils.config.ConfigDescriptor
 import org.fcitx.fcitx5.android.utils.config.ConfigDescriptor.ConfigBool
 import org.fcitx.fcitx5.android.utils.config.ConfigDescriptor.ConfigCustom
@@ -40,7 +35,6 @@ import org.fcitx.fcitx5.android.utils.config.ConfigDescriptor.ConfigString
 import org.fcitx.fcitx5.android.utils.config.ConfigType
 import org.fcitx.fcitx5.android.utils.navigateWithAnim
 import org.fcitx.fcitx5.android.utils.parcelableArray
-import org.fcitx.fcitx5.android.utils.toast
 import timber.log.Timber
 
 object PreferenceScreenFactory {
@@ -77,6 +71,9 @@ object PreferenceScreenFactory {
         save: () -> Unit
     ) {
 
+        // Only expose supported bundled editors, not engine data-directory links.
+        if (descriptor is ConfigExternal && descriptor.knownType == null) return
+
         // Hide key related configs
         if (hideKeyConfig && ConfigType.pretty(descriptor.ty).contains("Key")) {
             return
@@ -102,12 +99,6 @@ object PreferenceScreenFactory {
             }
         }
 
-        fun pinyinDictionary() = Preference(context).apply {
-            setOnPreferenceClickListener {
-                navigate(SettingsRoute.PinyinDict(""))
-            }
-        }
-
         fun punctuationEditor(title: String, lang: String?) = Preference(context).apply {
             setOnPreferenceClickListener {
                 navigate(SettingsRoute.Punctuation(title, lang))
@@ -117,47 +108,6 @@ object PreferenceScreenFactory {
         fun quickPhraseEditor() = Preference(context).apply {
             setOnPreferenceClickListener {
                 navigate(SettingsRoute.QuickPhraseList)
-            }
-        }
-
-        fun tableInputMethod() = Preference(context).apply {
-            setOnPreferenceClickListener {
-                navigate(SettingsRoute.TableInputMethods)
-            }
-        }
-
-        fun pinyinCustomPhrase() = Preference(context).apply {
-            setOnPreferenceClickListener {
-                navigate(SettingsRoute.PinyinCustomPhrase)
-            }
-        }
-
-        fun rimeUserDataDir(title: String): Preference = LongClickPreference(context).apply {
-            setOnPreferenceClickListener {
-                AlertDialog.Builder(context)
-                    .setTitle(title)
-                    .setMessage(R.string.open_rime_user_data_dir)
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        try {
-                            context.startActivity(buildDocumentsProviderIntent())
-                        } catch (e: Exception) {
-                            context.toast(e)
-                        }
-                    }
-                    .show()
-                true
-            }
-
-            // make it a hidden option, because of compatibility issues
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                setOnPreferenceLongClickListener {
-                    try {
-                        context.startActivity(buildPrimaryStorageIntent("data/rime"))
-                    } catch (e: Exception) {
-                        context.toast(e)
-                    }
-                }
             }
         }
 
@@ -185,14 +135,6 @@ object PreferenceScreenFactory {
             }
         }
 
-        fun addonConfigPreference(addon: String) = Preference(context).apply {
-            setOnPreferenceClickListener {
-                navigate(
-                    SettingsRoute.AddonConfig(descriptor.description ?: descriptor.name, addon)
-                )
-            }
-        }
-
         when (descriptor) {
             is ConfigBool -> MySwitchPreference(context).apply {
                 summary = descriptor.tooltip
@@ -206,20 +148,12 @@ object PreferenceScreenFactory {
             }
             is ConfigEnumList -> listPreference(ConfigType.TyEnum)
             is ConfigExternal -> when (descriptor.knownType) {
-                ConfigExternal.ETy.PinyinDict -> pinyinDictionary()
                 ConfigExternal.ETy.Punctuation -> punctuationEditor(
                     descriptor.description ?: descriptor.name,
                     // fcitx://config/addon/punctuation/punctuationmap/zh_CN
                     descriptor.uri?.substringAfterLast('/')
                 )
                 ConfigExternal.ETy.QuickPhrase -> quickPhraseEditor()
-                ConfigExternal.ETy.Chttrans -> addonConfigPreference("chttrans")
-                ConfigExternal.ETy.TableGlobal -> addonConfigPreference("table")
-                ConfigExternal.ETy.AndroidTable -> tableInputMethod()
-                ConfigExternal.ETy.PinyinCustomPhrase -> pinyinCustomPhrase()
-                ConfigExternal.ETy.RimeUserDataDir -> rimeUserDataDir(
-                    descriptor.description ?: descriptor.name
-                )
                 else -> stubPreference()
             }
             is ConfigInt -> {

@@ -37,10 +37,6 @@ gradlePlugin {
             id = "org.fcitx.fcitx5.android.lib-convention"
             implementationClass = "AndroidLibConventionPlugin"
         }
-        register("androidPluginAppConvention") {
-            id = "org.fcitx.fcitx5.android.plugin-app-convention"
-            implementationClass = "AndroidPluginAppConventionPlugin"
-        }
         register("buildMetadata") {
             id = "org.fcitx.fcitx5.android.build-metadata"
             implementationClass = "BuildMetadataPlugin"
@@ -72,7 +68,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/fcitx5-android/fcitx5-android")
+            url = uri("https://maven.pkg.github.com/TypeDuck-HK/fcitx5-android")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")

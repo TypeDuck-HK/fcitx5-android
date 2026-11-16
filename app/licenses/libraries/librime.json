@@ -1,0 +1,11 @@
+{
+    "uniqueId": "rime/librime",
+    "artifactVersion": "1.1.5",
+    "description": "Rime Input Method Engine",
+    "name": "TypeDuck librime (fork of rime/librime)",
+    "website": "https://github.com/TypeDuck-HK/librime",
+    "tag": "native",
+    "licenses": [
+        "BSD-3-Clause"
+    ]
+}

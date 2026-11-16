@@ -3,7 +3,7 @@ name: Nix
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   develop:
@@ -24,4 +24,3 @@ jobs:
       - name: Build Release APK
         run: |
           nix develop .#noAS --command ./gradlew :app:assembleRelease
-          nix develop .#noAS --command ./gradlew :assembleReleasePlugins

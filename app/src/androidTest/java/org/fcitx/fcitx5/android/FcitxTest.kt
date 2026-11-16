@@ -48,7 +48,7 @@ class FcitxTest {
             // wait fcitx started
             runBlocking {
                 receiveFirst<FcitxEvent.ReadyEvent>()
-                fcitx.setEnabledIme(arrayOf("pinyin"))
+                fcitx.setEnabledIme(arrayOf("rime"))
                 fcitx.setGlobalConfig(
                     RawConfig(
                         arrayOf(
@@ -105,27 +105,11 @@ class FcitxTest {
     }
 
     @Test
-    fun testWbx(): Unit = runBlocking {
-        fcitx.setEnabledIme(arrayOf("wbx"))
-        sendString("wqvb")
-        val expected = "你好"
-        fcitx.select(0)
-        val commitString = receiveFirstCommitString()?.data
-        Timber.i("commitString is $commitString")
-        Assert.assertEquals(expected, commitString)
-        fcitx.reset()
-    }
-
-    @Test
-    fun testPinyin(): Unit = runBlocking {
-        fcitx.setEnabledIme(arrayOf("pinyin"))
-        sendString("nihaoshijie")
-        val expected = "你好世界"
-        fcitx.select(0)
-        val commitString = receiveFirstCommitString()?.data
-        Timber.i("commitString is $commitString")
-        Assert.assertEquals(expected, commitString)
-        fcitx.reset()
+    fun testBundledEngines(): Unit = runBlocking {
+        Assert.assertEquals(
+            setOf("keyboard-us", "rime"),
+            fcitx.availableIme().map { it.uniqueName }.toSet()
+        )
     }
 
     @Test

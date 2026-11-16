@@ -2,7 +2,7 @@ name: Publish
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'build-logic/**'
       - 'lib/**'
@@ -40,8 +40,7 @@ jobs:
       - name: Publish build convention and libs
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-          GITHUB_ACTOR: fcitx5-android-bot
+          GITHUB_ACTOR: ${{ github.actor }}
         run: |
           ./gradlew :build-logic:convention:publish
           ./gradlew :lib:common:publish
-          ./gradlew :lib:plugin-base:publish
